@@ -18,7 +18,7 @@ Ich komme aus einer Zeit, in der die Märklin 6021-Zentrale "der heiße Scheiß"
 
 Das -im Vergleich zur "alten Digitalzeit"- aufwändige Suchen der umzuschaltenden Weichen in der MS2 hat dann aber wieder die Idee eines "elektronischen Stellwerks" geweckt. Ganz besonders, nachdem ich herausgefunden habe, dass Märklin offenbar einen CAN-Bus einsetzt. 
 
-### Der CAN-Bus
+### Exkurs zum CAN-Bus
 Den Begriff hat wahrscheinlich jeder schon mal gehört, der sich etwas intensiver mit KFZ-Technik beschäftigt hat. Bekannt ist dieses Bussystem dafür, dass es praktisch in jedem PKW und LKW eingebaut wird und dort Steuergeräte, Sensoren und Aktoren (also irgendwas, an dem etwas passiert) miteinander verbindet.
 
 Im Gegensatz zu einem Computer-Netzwerk ("LAN") werden Pakete aber nicht zielgerichtet von einer Stelle zur anderen geschickt. Sondern jeder Nachricht wird, vereinfacht gesagt, eine Typenkennung vorangestellt ("betrifft Blinker links", "betrifft Blinker rechts", "Nachricht vom Geschwindigkeitssensor", "Nachricht vom Kat") und auf den Bus geschickt. 
@@ -59,5 +59,17 @@ Durch diese Technik und die üblicherweise miteinander verdrillten Leitungen ist
 Der CAN-Bus erreicht im Automotive-Bereich recht hohe Geschwindigkeiten (1 MBit pro Sekunden). Im Märklin-System wird allerdings nur ein viertel der Geschwindigkeit verwendet. 
 
 Der "MBUS" läuft also mit 250kBit/s. Das ist hinterher wichtig für die Parametrierung des Raspberry.
+
+## DAS CAN-Hat
+Ich habe mich bewußt zu einem etwas teureren, dafür aber galvanisch isoliertem CAN-Hat entschieden. Warum? 
+
+Der Raspberry samt CAN-Hat muss ja nicht unbedingt an der gleichen Steckdose hängen wie der Trafo der Modellbahn. Theoretisch könnten also andere Potentiale und damit "Kriechströme" auftreten, die entweder die Modellbahnsteuerung oder den Computer beschädigen könnten.
+
+Die Trennung wird in der Regel durch Optokoppler erreicht. Das ist ein kleines Gehäuse, in dem auf der einen Seite Anschlüsse zu einer Diode gehen. Je nach "0" oder "1" geht die dann an oder aus.
+
+In der anderen Seite des Gehäuses ist ein lichtempfindliches Element eingebaut. Es "sieht", wenn die Diode an ist, und gibt dann eine "1" zum Computer aus. Ansonsten einen "0".
+
+Das CAN-Hat wird im Raspi so in das System eingebunden wie z.B. eine serielle Schnittstelle oder eine Netzwerkschnittstelle.
+
 
 
