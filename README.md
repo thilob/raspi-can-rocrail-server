@@ -127,8 +127,25 @@ Anschließend muss das Skript mit Root-Rechten ("Admin-Rechten") gestartet werde
 
 <code>sudo ./can-health-check.sh</code>
 
+Bei CAN-Hats mit mehreren Bussen kann es auch vorkommen, dass die Busnamen vertauscht sind (can0 / can1). Deshalb den Health-Check ruhig auch mit den Optionen can0 und can1 ausprobieren.
 
+In meinem Fall hängt eine Gleisbox dran. Die sendet -auch im Stop-Betrieb!- einzelne CAN-Frames. Das sieht dann so aus:
 
+<code>
+  can1  0030532D   [0] 
+  can1  00314F73   [8]  47 47 34 08 01 44 00 10
+  can1  0030532D   [0] 
+  can1  00314F73   [8]  47 47 34 08 01 44 00 10
+  can1  0030532D   [0] 
+  can1  00314F73   [8]  47 47 34 08 01 44 00 10
+  can1  0030532D   [0] 
+  can1  00314F73   [8]  47 47 34 08 01 44 00 10
+  can1  0030532D   [0] 
+  can1  00314F73   [8]  47 47 34 08 01 44 00 10
+  can1  0008532D   [6]  00 00 40 06 02 CA
+</code>
+
+Wenn diese Frames angezeigt werden, habt ihr das schwerste hinter euch. 
 
 
 
