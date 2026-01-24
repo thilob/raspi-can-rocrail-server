@@ -1,2 +1,2 @@
 # raspi-can-rocrail-server
-Skripte zum leichen aufsetzen eines Raspi mit CAN-Interface und Rocrail
+Skripte zum leichen Aufsetzen eines Raspi mit CAN-Interface und Rocrail
