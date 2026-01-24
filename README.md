@@ -63,13 +63,57 @@ Der "MBUS" läuft also mit 250kBit/s. Das ist hinterher wichtig für die Paramet
 ## DAS CAN-Hat
 Ich habe mich bewußt zu einem etwas teureren, dafür aber galvanisch isoliertem CAN-Hat entschieden. Warum? 
 
-Der Raspberry samt CAN-Hat muss ja nicht unbedingt an der gleichen Steckdose hängen wie der Trafo der Modellbahn. Theoretisch könnten also andere Potentiale und damit "Kriechströme" auftreten, die entweder die Modellbahnsteuerung oder den Computer beschädigen könnten.
+Der Raspberry samt CAN-Hat muss ja nicht unbedingt an der gleichen Steckdose hängen wie der Trafo der Modellbahn. Theoretisch könnten also andere Potentiale und damit "Kriechströme" auftreten, die entweder die Modellbahnsteuerung oder den Computer beschädigen.
 
-Die Trennung wird in der Regel durch Optokoppler erreicht. Das ist ein kleines Gehäuse, in dem auf der einen Seite Anschlüsse zu einer Diode gehen. Je nach "0" oder "1" geht die dann an oder aus.
+Die Trennung wird in der Regel durch Optokoppler erreicht. Das sind kleine Gehäuse, in denen auf der einen Seite Anschlüsse zu einer LED gehen. Je nach "0" oder "1" geht die dann an oder aus.
 
 In der anderen Seite des Gehäuses ist ein lichtempfindliches Element eingebaut. Es "sieht", wenn die Diode an ist, und gibt dann eine "1" zum Computer aus. Ansonsten einen "0".
 
 Das CAN-Hat wird im Raspi so in das System eingebunden wie z.B. eine serielle Schnittstelle oder eine Netzwerkschnittstelle.
+
+Erwähnen möchte ich noch den Begriff der "Terminierung". Damit der Bus stabil läuft (und die verschiedenen Spannungen sauber erzeugt werden können), sind an den Busenden Abschlusswiderstände vorgesehen. In der Regel sind die im Auslieferungszustand schon richtig gesetzt.
+
+Außerdem haben manche CAN-Hats Jumper für verschiedene Betriebsspannungen. Beachtet, dass der Raspberry an den GPIO-Pins üblicherweise mit 3,3V betrieben wird.
+
+## Raspi für das CAN-Hat vorbereiten
+
+### Einstellungen im Konfigurationsmenü
+
+Durch aufrufen von <code>raspi-config</code> gelangt man in das Konfigurationsprogramm des Raspberry.
+
+Dort wird geändert:
+- (bei Bedarf) System Options -> Hostname: der Gerätename des Raspberry. Betreibt man mehrere in seinem Netzwerk, müssen alle unterschiedliche Namen haben.
+- Interface Options -> SPI: einschalten. Das "Serial Peripheral Interface" bildet die Kommunikationsschnittstelle zwischen Raspberry und dem CAN-Hat. Über diese Leitungen weden die Daten übertragen.
+- Advanced Options -> WLAN Power Save: ausschalten. Gerade wenn man später über WLAN Kommandos oder Zustände senden oder empfangen will, sollte man den Stromsparmodus ausschalten. Sonst könnte der Raspberry die ein oder andere Nachricht verpassen.
+
+Anschließend bitte den Raspberry einmal booten. Danach kann man das Gerät auch unter dem neuen Hostnamen erreichen.
+
+### Das Skript für die automatische Systemkonfiguration
+Technisch müssen nun auf dem Raspberry das Device-Tree Overlay angepasst werden und Kernelmodule geladen werden.
+
+Für viele Leute ist das "Magie". Deshalb habe ich per Vibe Coding dafür ein Skript erstellen lassen.
+
+Vibe Coding beschreibt die Tätigkeit, bei der man einer KI "sagt" (prompted), was sie machen soll. Eine recht coole Technik. Wenn man weiß, wie etwas funktioniert und was hinterher passieren soll, kann man das der KI mitteilen und die erstellt dann das "Programm" dazu. Früher war das sehr viel Tipparbeit und Fehlersucherei......
+
+In Kurzform passieren in dem folgenden Skript diese Schritte:
+- Dem Raspberry wird gesagt, an welchen Anschlüssen er mit welcher Geschwindigkeit mit dem CAN-Hat hardwareseitig reden muss.
+- Dann wird dem Raspberry-Kernel gesagt, wie es mit dem Hat softwareseitig reden muss
+- dann wird der CAN-Bus auf dem Raspberry systemseitig so nachgebildet, dass er sich wie ein Netzwerkanschluss verhält.
+- im letzten Schritt wird das Softwarepaket "can-utils" installiert. Damit können wir per Kommandozeile auf dem CAN-Bus mitlesen und auch schreiben.
+
+Damit nichts zerstört wird, wenn man das Skript mehrfach ausführt, prüft es bei jedem Schritt ob die Änderung nicht schon durchgeführt wurde (Idempotenz).
+
+#### Aufruf des Skriptes für die automatisch Systemkonfiguration
+
+Das Skript <code>setup-can.sh</code> findet ihr hier im Github.
+
+Um es ausführbar ("startbar") zu machen, muss das Execute-Bit gesetzt werden:
+<code>chmod +x setup_can.sh</code>
+
+Anschließend muss das Skript mit Root-Rechten ("Admin-Rechten") gestartet werden:
+<code>sudo ./setup_can_marklin.sh</code>
+
+
 
 
 
