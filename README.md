@@ -1,5 +1,5 @@
 # raspi-can-rocrail-server
-Skripte zum leichen Aufsetzen eines Raspi mit CAN-Interface und Rocrail
+Skripte zum leichten Aufsetzen eines Raspi mit CAN-Interface und Rocrail
 
 Auf dieser Seite beschreibe ich, wie ein frisch aufgesetzter Raspberry Pi mit Rocrail ausgestattet und durch Nutzung eines CAN-Hat auch zum CAN-Interface für Rocrail wird.
 
