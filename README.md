@@ -172,7 +172,7 @@ Ihr könnt nun Rocview auf einem weiteren Rechner im WLAN starten und euch mit u
 - [x] euch gefällt Rocrail/Rocview?
 - [x] mehrere Leute haben dafür ihre Freizeit geopfert und die Software programmiert!
 - [x] die Software wird weiterentwickelt. Die Leute opfern weiterhin ihre Zeit. **FÜR EUCH!**
-- [x] Seit fair! Unterstützt die Programmierer und erwerbt einen [Support Key!](https://wiki.rocrail.net/doku.php?id=supportkey-en#commercial_support_key)
+- [x] Seid fair! Unterstützt die Programmierer und erwerbt einen [Support Key!](https://wiki.rocrail.net/doku.php?id=supportkey-en#commercial_support_key)
 - [x] Im Gegenzug nutzt ihr mit dem Support Key die Pro-Version von Rocrail. Die Vorteile findet ihr auch auf der Seite.
 
 ---
