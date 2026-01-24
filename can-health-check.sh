@@ -13,7 +13,7 @@ fail() { echo "[CAN-HEALTH] ERROR: $*" >&2; exit 1; }
 trap 'rc=$?; warn "Abbruch (rc=$rc) in Zeile $LINENO: $BASH_COMMAND"; exit $rc' ERR
 
 usage() {
-  cat <<EOF
+  cat <<EOU
 Usage:
   sudo $0 [can0|can1] [--fix] [--timeout N]
 
@@ -21,7 +21,7 @@ Beispiele:
   sudo $0
   sudo $0 can1
   sudo $0 can0 --fix
-EOF
+EOU
 }
 
 parse_args() {
@@ -67,7 +67,6 @@ read_bitrate() {
 svc_name() { echo "can-marklin@${CAN_IF}.service"; }
 
 check_service_presence() {
-  # Check template exists
   if systemctl list-unit-files --no-pager 2>/dev/null | grep -q '^can-marklin@\.service'; then
     log "Boot-Service Template gefunden: can-marklin@.service"
     return 0
@@ -90,7 +89,7 @@ check_service_state() {
     warn "Boot-Service NICHT enabled: $s"
     if [[ "$DO_FIX" -eq 1 ]]; then
       log "FIX: enable --now $s"
-      systemctl enable --now "$s" || warn "Konnte $s nicht aktivieren (möglicherweise nicht installiert)."
+      systemctl enable --now "$s" || warn "Konnte $s nicht aktivieren."
     else
       warn "Tipp: sudo systemctl enable --now $s"
     fi
@@ -108,11 +107,11 @@ check_service_state() {
 }
 
 bring_up_hint() {
-  cat >&2 <<EOF
+  cat >&2 <<EOH
 [CAN-HEALTH] Vorschlag:
   sudo ip link set ${CAN_IF} down
   sudo ip link set ${CAN_IF} up type can bitrate ${EXPECTED_BITRATE} restart-ms 100
-EOF
+EOH
 }
 
 fix_interface() {
@@ -205,16 +204,12 @@ main() {
 
   log "Starte Health Check für $CAN_IF"
 
-  # Service checks (optional but helpful)
   check_service_presence || true
   check_service_state || true
 
   check_bitrate
-  if ! check_states_and_maybe_fix; then
-    true
-  fi
+  check_states_and_maybe_fix || true
 
-  # Wenn immer noch DOWN/STOPPED: Traffic-Test überspringen
   local lstate cstate
   lstate="$(read_link_state)"
   cstate="$(read_can_state)"
@@ -229,3 +224,6 @@ main() {
 }
 
 main "$@"
+
+
+

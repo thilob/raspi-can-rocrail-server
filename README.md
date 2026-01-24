@@ -115,6 +115,19 @@ Anschließend muss das Skript mit Root-Rechten ("Admin-Rechten") gestartet werde
 
 <code>sudo ./setup_can_marklin.sh</code>
 
+#### Health-Check
+
+Das Skript <code>can-health-check.sh</code> überprüft anschließend die verschiedenen Parameter des CAN-Bus.
+
+Auch hier wieder: ausführbar machen:
+
+<code>chmod +x setup_can.sh</code>
+
+Anschließend muss das Skript mit Root-Rechten ("Admin-Rechten") gestartet werden:
+
+<code>sudo ./can-health-check.sh</code>
+
+
 
 
 
