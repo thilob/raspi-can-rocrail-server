@@ -1,3 +1,5 @@
+**<a>🇩🇪 Deutsche Version</a>** | **<a href="README.en.md">🇬🇧 English version</a>**
+
 # raspi-can-rocrail-server
 Skripte zum leichten Aufsetzen eines Raspi mit CAN-Interface und Rocrail
 
@@ -56,12 +58,12 @@ Dieser Versatz hat mehrere Vorteile:
 
 Durch diese Technik und die üblicherweise miteinander verdrillten Leitungen ist der CAN-Bus robust gegen einstrahlende Signale wie Mobilfunk oder auch starke Elektromotoren.
 
-Der CAN-Bus erreicht im Automotive-Bereich recht hohe Geschwindigkeiten (1 MBit pro Sekunden). Im Märklin-System wird allerdings nur ein viertel der Geschwindigkeit verwendet. 
+Der CAN-Bus erreicht im Automotive-Bereich recht hohe Geschwindigkeiten (1 MBit pro Sekunden). Im Märklin-System wird allerdings nur ein Viertel der Geschwindigkeit verwendet. 
 
 Der "MBUS" läuft also mit 250kBit/s. Das ist hinterher wichtig für die Parametrierung des Raspberry.
 
 ## DAS CAN-Hat
-Ich habe mich bewußt zu einem etwas teureren, dafür aber galvanisch isoliertem CAN-Hat entschieden. Warum? 
+Ich habe mich bewusst zu einem etwas teureren, dafür aber galvanisch isoliertem CAN-Hat entschieden. Warum? 
 
 Der Raspberry samt CAN-Hat muss ja nicht unbedingt an der gleichen Steckdose hängen wie der Trafo der Modellbahn. Theoretisch könnten also andere Potentiale und damit "Kriechströme" auftreten, die entweder die Modellbahnsteuerung oder den Computer beschädigen.
 
@@ -79,21 +81,21 @@ Außerdem haben manche CAN-Hats Jumper für verschiedene Betriebsspannungen. Bea
 
 ### Einstellungen im Konfigurationsmenü
 
-Durch aufrufen von <code>raspi-config</code> gelangt man in das Konfigurationsprogramm des Raspberry.
+Durch Aufrufen von <code>raspi-config</code> gelangt man in das Konfigurationsprogramm des Raspberry.
 
 Dort wird geändert:
 - (bei Bedarf) System Options -> Hostname: der Gerätename des Raspberry. Betreibt man mehrere in seinem Netzwerk, müssen alle unterschiedliche Namen haben.
 - Interface Options -> SPI: einschalten. Das "Serial Peripheral Interface" bildet die Kommunikationsschnittstelle zwischen Raspberry und dem CAN-Hat. Über diese Leitungen weden die Daten übertragen.
 - Advanced Options -> WLAN Power Save: ausschalten. Gerade wenn man später über WLAN Kommandos oder Zustände senden oder empfangen will, sollte man den Stromsparmodus ausschalten. Sonst könnte der Raspberry die ein oder andere Nachricht verpassen.
 
-Anschließend bitte den Raspberry einmal booten. Danach kann man das Gerät auch unter dem neuen Hostnamen erreichen.
+Anschließend bitte den Raspberry einmal neu booten. Danach kann man das Gerät auch unter dem neuen Hostnamen erreichen.
 
 ### Das Skript für die automatische Systemkonfiguration
 Technisch müssen nun auf dem Raspberry das Device-Tree Overlay angepasst werden und Kernelmodule geladen werden.
 
-Für viele Leute ist das "Magie". Deshalb habe ich per Vibe Coding dafür ein Skript erstellen lassen.
+Für viele Leute ist das "Magie". Deshalb habe ich per AI-assisted Coding dafür ein Skript erstellen lassen.
 
-Vibe Coding beschreibt die Tätigkeit, bei der man einer KI "sagt" (prompted), was sie machen soll. Eine recht coole Technik. Wenn man weiß, wie etwas funktioniert und was hinterher passieren soll, kann man das der KI mitteilen und die erstellt dann das "Programm" dazu. Früher war das sehr viel Tipparbeit und Fehlersucherei......
+AI-assisted Coding beschreibt die Tätigkeit, bei der man einer KI "sagt" (prompted), was sie machen soll. Eine recht coole Technik. Wenn man weiß, wie etwas funktioniert und was hinterher passieren soll, kann man das der KI mitteilen und die erstellt dann das "Programm" dazu. Früher war das sehr viel Tipparbeit und Fehlersucherei......
 
 In Kurzform passieren in dem folgenden Skript diese Schritte:
 - Dem Raspberry wird gesagt, an welchen Anschlüssen er mit welcher Geschwindigkeit mit dem CAN-Hat hardwareseitig reden muss.
@@ -103,17 +105,17 @@ In Kurzform passieren in dem folgenden Skript diese Schritte:
 
 Damit nichts zerstört wird, wenn man das Skript mehrfach ausführt, prüft es bei jedem Schritt ob die Änderung nicht schon durchgeführt wurde (Idempotenz).
 
-#### Aufruf des Skriptes für die automatisch Systemkonfiguration
+#### Aufruf des Skriptes für die automatische Systemkonfiguration
 
 Das Skript <code>setup-can.sh</code> findet ihr hier im Github.
 
 Um es ausführbar ("startbar") zu machen, muss das Execute-Bit gesetzt werden:
 
-<code>chmod +x setup_can.sh</code>
+<code>chmod +x setup-can.sh</code>
 
 Anschließend muss das Skript mit Root-Rechten ("Admin-Rechten") gestartet werden:
 
-<code>sudo ./setup_can_marklin.sh</code>
+<code>sudo ./setup-can.sh</code>
 
 #### Health-Check
 
@@ -121,7 +123,7 @@ Das Skript <code>can-health-check.sh</code> überprüft anschließend die versch
 
 Auch hier wieder: ausführbar machen:
 
-<code>chmod +x setup_can.sh</code>
+<code>chmod +x can-health-check.sh</code>
 
 Anschließend muss das Skript mit Root-Rechten ("Admin-Rechten") gestartet werden:
 
@@ -145,7 +147,7 @@ In meinem Fall hängt eine Gleisbox dran. Die sendet -auch im Stop-Betrieb!- ein
   can1  0008532D   [6]  00 00 40 06 02 CA
 </code>
 
-Wenn diese Frames angezeigt werden, habt ihr das schwerste hinter euch. 
+Wenn diese Frames angezeigt werden, habt ihr das Schwerste hinter euch. 
 
 ---
 
@@ -156,15 +158,15 @@ Die Software kann unter https://www.rocrail.online/rocrail-snapshot/index.php he
 Da wir die 64bit-Version von PiOS nutzen, müssen wir auch die 64bit-Version ("ARM64") von Rocrail für Raspberry Pi herunterladen.
 Üblicherweise lautet der Dateiname:  <code>Rocrail-PiOS11-ARM64.zip</code>
 
-Mit diesem Befehl wird das aktuelle Paket heruntergeladen und in das Unteverzeichnis "Rocrail" entpackt:
+Mit diesem Befehl wird das aktuelle Paket heruntergeladen und in das Unterverzeichnis "Rocrail" entpackt:
 <code>
 wget https://www.rocrail.online/rocrail-snapshot/Rocrail-PiOS11-ARM64.zip
 unzip Rocrail-PiOS11-ARM64.zip -d Rocrail
 cd Rocrail
 </code>
 
-Mit einem beherzten <code>./startrocrail.sh</code> solltet Rocrail auf dem Raspberry starten.
-Ihr könnt nun Rocview auf einem weiteren Rechner im WLAN starten und euch mit unter Angabe des Hostnamens des Raspberry mit Rocrail verbinden ("Connect to").
+Mit einem beherzten <code>./startrocrail.sh</code> sollte Rocrail auf dem Raspberry starten.
+Ihr könnt nun Rocview auf einem weiteren Rechner im WLAN starten und euch unter Angabe des Hostnamens des Raspberry mit Rocrail verbinden ("Connect to").
 
 ---
 

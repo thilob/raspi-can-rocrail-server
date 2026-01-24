@@ -1,0 +1,78 @@
+name: README Translation Consistency Check
+
+on:
+  pull_request:
+    paths:
+      - 'README.md'
+      - 'README.en.md'
+  push:
+    branches:
+      - main
+    paths:
+      - 'README.md'
+      - 'README.en.md'
+
+jobs:
+  check-readme-sync:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      
+      - name: Check if both READMEs were updated
+        id: check_files
+        run: |
+          # Get list of changed files
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+          else
+            CHANGED_FILES=$(git diff --name-only HEAD^ HEAD)
+          fi
+          
+          echo "Changed files:"
+          echo "$CHANGED_FILES"
+          
+          README_MD_CHANGED=false
+          README_EN_CHANGED=false
+          
+          if echo "$CHANGED_FILES" | grep -q "^README\.md$"; then
+            README_MD_CHANGED=true
+          fi
+          
+          if echo "$CHANGED_FILES" | grep -q "^README\.en\.md$"; then
+            README_EN_CHANGED=true
+          fi
+          
+          echo "readme_md_changed=$README_MD_CHANGED" >> $GITHUB_OUTPUT
+          echo "readme_en_changed=$README_EN_CHANGED" >> $GITHUB_OUTPUT
+          
+          # Check if only one was changed
+          if [ "$README_MD_CHANGED" = true ] && [ "$README_EN_CHANGED" = false ]; then
+            echo "warning=Only README.md was updated. Please also update README.en.md" >> $GITHUB_OUTPUT
+            exit 0
+          elif [ "$README_MD_CHANGED" = false ] && [ "$README_EN_CHANGED" = true ]; then
+            echo "warning=Only README.en.md was updated. Please also update README.md" >> $GITHUB_OUTPUT
+            exit 0
+          else
+            echo "warning=" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Comment on PR if only one README changed
+        if: github.event_name == 'pull_request' && steps.check_files.outputs.warning != ''
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '⚠️ **README Translation Warning**\n\n${{ steps.check_files.outputs.warning }}\n\nPlease ensure both language versions are kept in sync.'
+            })
+      
+      - name: Create annotation
+        if: steps.check_files.outputs.warning != ''
+        run: |
+          echo "::warning::${{ steps.check_files.outputs.warning }}"
