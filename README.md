@@ -108,10 +108,13 @@ Damit nichts zerstört wird, wenn man das Skript mehrfach ausführt, prüft es b
 Das Skript <code>setup-can.sh</code> findet ihr hier im Github.
 
 Um es ausführbar ("startbar") zu machen, muss das Execute-Bit gesetzt werden:
+
 <code>chmod +x setup_can.sh</code>
 
 Anschließend muss das Skript mit Root-Rechten ("Admin-Rechten") gestartet werden:
+
 <code>sudo ./setup_can_marklin.sh</code>
+
 
 
 
