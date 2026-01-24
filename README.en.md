@@ -1,4 +1,4 @@
-**<a href="README.md">🇩🇪 Deutsche Version</a>** | **<a>🇬🇧 English version</a>**
+**[🇩🇪 Deutsche Version](README.md)** | **🇬🇧 English version**
 
 # raspi-can-rocrail-server
 Scripts for easily setting up a Raspberry Pi with a CAN interface and Rocrail

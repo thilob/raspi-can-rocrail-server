@@ -1,4 +1,4 @@
-**<a>🇩🇪 Deutsche Version</a>** | **<a href="README.en.md">🇬🇧 English version</a>**
+**🇩🇪 Deutsche Version** | **[🇬🇧 English version](README.en.md)**
 
 # raspi-can-rocrail-server
 Skripte zum leichten Aufsetzen eines Raspi mit CAN-Interface und Rocrail
