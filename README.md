@@ -40,7 +40,7 @@ Das Differentialsignal muss man sich grob vorstellen wie ein Rechtecksignal und 
 </code>
 
 
-Sollte also auf der oberen Leitung (High-Signal) ein Fehler auftreten, könnte man es durch Vergleich mit der unteren Leitung (Low-Signal) also feststellen.
+Sollte also auf der oberen Leitung (High-Signal) ein Fehler auftreten, könnte man es durch Vergleich mit der unteren Leitung (Low-Signal) feststellen.
 
 Der Schlüssel zur Robustheit ist allerdings, dass der imaginäre Spiegel nicht bei "0 Volt" liegt, sondern etwas darüber, nämlich bei +2,5 Volt. 
 
@@ -48,15 +48,15 @@ Mit diesem Versatz bedeutet eine digitale "1" auf der High-Leitung dann eine Spa
 
 Auf der Low-Leitung liegt die digitale "1" dann auch bei +2,5V und die digitale "0" bei +1,5V.
 
-Dieser Versatz hat also mehrere Vorteile:
+Dieser Versatz hat mehrere Vorteile:
 - Testet man einen CAN-Bus durch, darf auf keiner der beiden Leitungen 0 Volt anliegen. Dann ist etwas verkehrt - in der Regel ist dann die Busleitung unterbrochen.
 - Wenn man auf der Leitung einen Wert >+2,5V wahrnimmt, handelt es sich definitiv um die High-Leitung.
 - Wenn man auf der Leitung einen Wert zwischen +1,5V und +2,5V wahrnimmt, handelt es sich um die Low-Leitung.
-- High- und Low-Leitungen darf man im CAN-System demnach auch nicht vertauschen. Dann nehmen die Vergleicher-Bausteine in den CAN-Buselementen kein gültiges Signal mehr wahr.
+- High- und Low-Leitungen darf man im CAN-System nicht vertauschen. Dann erkennen die Vergleicher-Bausteine in den CAN-Buselementen kein gültiges Signal mehr.
 
-Durch diese Technik und die üblicherweise miteinander verdrillten Leitungen ist der CAN-Bus auch recht robust gegen einstrahlende Signale wie Mobilfunk oder auch starke Elektromotoren.
+Durch diese Technik und die üblicherweise miteinander verdrillten Leitungen ist der CAN-Bus robust gegen einstrahlende Signale wie Mobilfunk oder auch starke Elektromotoren.
 
-Der CAN-Bus kann im Automotive-Bereich auch rech hohe Geschwindigkeiten verarbeiten (1 MBit pro Sekunden). Im Märklin-System wird allerdings nur ein viertel der Geschwindigkeit verwendet. 
+Der CAN-Bus erreicht im Automotive-Bereich recht hohe Geschwindigkeiten (1 MBit pro Sekunden). Im Märklin-System wird allerdings nur ein viertel der Geschwindigkeit verwendet. 
 
 Der "MBUS" läuft also mit 250kBit/s. Das ist hinterher wichtig für die Parametrierung des Raspberry.
 
