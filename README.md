@@ -14,7 +14,7 @@ Als CAN-Hat verwende ich ein "Waveshare 2-Channel Isolated CAN Expansion HAT for
 - anschließend wird der Raspi mit <code>sudo reboot</code> neu gestartet.
 
 ## Mein Setup
-Ich komme aus einer Zeit, in der die Märklin 6021-Zentrale "der heiße Scheiß" war. Damit bin ich auch immer noch glücklich. Als einer, der aber seit gut drei Jahrzehnten im IT-Bereich unterwegs ist, habe ich mir schon hin und wieder die Frage gestellt, wie man denn so etwas wie ein "elektronisches Stellwerk" hinbekommen kann. Die verschiedenen Control Station oder andere, tolle Produkte von Mitbewerbern waren preislich außerhalb des Hobby-Budgets, so dass ich mich im nächsten Schritt zu einer Mobile Station 2 durchgerungen habe. Damit war ich vorerst einen Schritt moderner.
+Ich komme aus einer Zeit, in der die Märklin 6021-Zentrale "der heiße Scheiß" war. Damit bin ich auch immer noch glücklich. Als einer, der aber seit gut drei Jahrzehnten im IT-Bereich unterwegs ist, habe ich mir schon hin und wieder die Frage gestellt, wie man denn so etwas wie ein "elektronisches Stellwerk" hinbekommen kann. Die verschiedenen Control Station oder andere, tolle Produkte von Mitbewerbern waren preislich außerhalb des Hobby-Budgets, so dass ich mich im nächsten Schritt zu einer Mobile Station 2 mit Gleisbox 61116 durchgerungen habe. Damit war ich vorerst einen Schritt moderner.
 
 Das -im Vergleich zur "alten Digitalzeit"- aufwändige Suchen der umzuschaltenden Weichen in der MS2 hat dann aber wieder die Idee eines "elektronischen Stellwerks" geweckt. Ganz besonders, nachdem ich herausgefunden habe, dass Märklin offenbar einen CAN-Bus einsetzt. 
 
