@@ -147,6 +147,46 @@ In meinem Fall hängt eine Gleisbox dran. Die sendet -auch im Stop-Betrieb!- ein
 
 Wenn diese Frames angezeigt werden, habt ihr das schwerste hinter euch. 
 
+---
+
+## Installation von Rocrail
+
+Die Software kann unter https://www.rocrail.online/rocrail-snapshot/index.php heruntergeladen werden.
+
+Da wir die 64bit-Version von PiOS nutzen, müssen wir auch die 64bit-Version ("ARM64") von Rocrail für Raspberry Pi herunterladen.
+Üblicherweise lautet der Dateiname:  <code>Rocrail-PiOS11-ARM64.zip</code>
+
+Mit diesem Befehl wird das aktuelle Paket heruntergeladen und in das Unteverzeichnis "Rocrail" entpackt:
+<code>
+wget https://www.rocrail.online/rocrail-snapshot/Rocrail-PiOS11-ARM64.zip
+unzip Rocrail-PiOS11-ARM64.zip -d Rocrail
+cd Rocrail
+</code>
+
+Mit einem beherzten <code>./startrocrail.sh</code> solltet Rocrail auf dem Raspberry starten.
+Ihr könnt nun Rocview auf einem weiteren Rechner im WLAN starten und euch mit unter Angabe des Hostnamens des Raspberry mit Rocrail verbinden ("Connect to").
+
+---
+
+==Rocrail ist Opensource! Und Opensource sollte euch auch "etwas wert sein"!==
+- [x] euch gefällt Rocrail/Rocview?
+- [x] mehrere Leute haben dafür ihre Freizeit geopfert und die Software programmiert!
+- [x] die Software wird weiterentwickelt. Die Leute opfern weiterhin ihre Zeit. ==FÜR EUCH!==
+- [x] Seit fair! Unterstützt die Programmierer und erwerbt einen [Support Key!](https://wiki.rocrail.net/doku.php?id=supportkey-en#commercial_support_key)
+- [x] Im Gegenzug nutzt ihr mit dem Support Key die Pro-Version von Rocrail. Die Vorteile findet ihr auch auf der Seite.
+
+---
+
+## Wo geht die Reise als nächstes hin?
+
+Ich werde hier nicht die Konfiguration von Rocrail erklären. Das können andere besser. Aber: Das "elektronische Stellwerk" ist damit möglich. Und noch viel, viel mehr!
+Ich habe großes Interesse an zwei Dingen:
+
+- **Blockbetrieb** mit Rocrail: Ich möchte über Lichtschranken feststellen, wenn ein Zug in einen bestimmten Bereich hereinfährt oder ihn wieder verlässt. So kann ein automatischer Betrieb durchgeführt werden. Dafür will ich IR-Lichtschranken an einen ESP32 anschließen, welcher über das UDP-Protokoll per WLAN Zustandsmeldungen an die Rocrail-Zentrale sendet. Und vielleicht funktioniert ja auch der umgekrhte Weg und man kann dem ESP32 Befehle senden. So könnten zum Beispiel recht einfach Lichtsignale angesteuert werden.
+- **Entwicklung eines DCC-Dekoders**: Wenn der Weg zum ESP32 unzuverlässig ist, kann ein ESP32 aber als DCC-Dekoder programmiert werden. So könnten Dinge wie Lichtsignale, (Haus-)Beleuchtung, Funktionsmodelle oder eine Drehscheibe digitalisiert werden. Alte Drehscheiben bekommt man für unter 100 Euro. Neue kosten ein vielfaches - von Schiebebühnen ganz zu schweigen.
+
+Mehr an dieser Stelle, sobald es konkrete Planungen gibt.
 
 
-
+Viele Grüße,
+Thilo
